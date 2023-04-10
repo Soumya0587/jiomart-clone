@@ -78,10 +78,10 @@ const NavDrawer = ({ isOpen, onClose }) => {
             <Text fontWeight={"bolder"} p={"3"}>Download apps</Text>
             <Flex p={"3"} gap={"1rem"}>
               
-              <Box>
+              <Box cursor={"pointer"}>
                 <Image src={play_store_logo} alt="google" />
               </Box>
-              <Box>
+              <Box cursor={"pointer"}>
                 <Image src={app_store_logo} alt="google" />
               </Box>
             </Flex>
