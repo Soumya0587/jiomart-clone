@@ -13,7 +13,7 @@ function App() {
   return (
     <div className="font-link">
       <Navbar/>
-      <Footer/>
+      {/* <Footer/> */}
      
     </div>
   )
