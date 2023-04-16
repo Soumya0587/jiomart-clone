@@ -7,6 +7,7 @@ import "./index.css";
 import Footer from './Components/Footer/Footer'
 import Navbar from './Components/Navbar/Navbar';
 import Home from './Pages/Home';
+import AllRoutes from './AllRoutes/AllRoutes';
 
 function App() {
 
@@ -14,7 +15,7 @@ function App() {
   return (
     <div className="font-link">
       <Navbar/>
-      <Home/>
+      <AllRoutes/>
       {/* <Footer/> */}
      
     </div>

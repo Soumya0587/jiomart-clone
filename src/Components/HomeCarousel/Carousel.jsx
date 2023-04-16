@@ -7,7 +7,7 @@ import { AiOutlineLeft } from 'react-icons/ai';
 
 import Slider from 'react-slick';
 
-import { data } from './Carousel_data'
+import { data } from './CarouselData'
 const settings = {
   dots: true,
   arrows: false,
