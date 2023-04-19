@@ -81,7 +81,7 @@ const ProductSlider = ({ data,value }) => {
                 </Flex>
               </Stack>
               <Button
-                onClick={() => handleAddtoCart(item)}
+                // onClick={() => handleAddtoCart(item)}
                 w={"95%"}
                 margin="auto"
                 mb="3"
