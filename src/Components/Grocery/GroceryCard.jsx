@@ -9,7 +9,7 @@ const GroceryCard = ({props}) => {
     <Box>
         <Card maxW="sm" h="400px" mr={1} ml={1}>
               <Flex alignItems={"center"} justifyContent={"center"}>
-              <Link to={`product/${props._id}`} ><Image
+              <Link to={`/signlegrocery/${props._id}`} ><Image
                   
                   
                   w={"100px"}

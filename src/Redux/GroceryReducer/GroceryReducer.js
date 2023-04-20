@@ -22,7 +22,7 @@ import {GET_PRODUCTS_REQUEST , GET_PRODUCTS_SUCCESS , GET_PRODUCTS_ERROR , GET_T
         return {
           ...state,
           loading: false,
-          products: payload,
+          products:payload,
         };
       }
       case GET_PRODUCTS_ERROR: {

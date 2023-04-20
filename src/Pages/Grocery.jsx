@@ -23,6 +23,7 @@ import { useParams, useSearchParams } from "react-router-dom";
 import { BASE_URL } from '../Util/Constant';
 import { BrandFilter } from '../Components/Filter/BrandFilter';
 import GroceryCard from '../Components/Grocery/GroceryCard';
+import Accordian from '../Components/Accordian/Accordian';
 const Grocery = () => {
 
 const [searchParams, setSearchParams] = useSearchParams();
@@ -63,7 +64,7 @@ console.log(initialBrands);
 
   const [value, setValue] = useState();
   const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(6);
+  const [limit, setLimit] = useState(30);
   const { Q } = useParams();
 
   const c_value =
@@ -136,7 +137,25 @@ console.log(initialBrands);
         };
         getFilterProducts(params);
         setSearchParams(params);
-      }, [brand]);
+        
+
+      }, [brand,page,limit]);
+
+      // const handleInfiniteScroll= async()=>{
+      //   try{
+      //     if(window.innerHeight + document.documentElement.scrollTop + 1 >= document.documentElement.scrollHeight){
+      //       setPage((prev)=> prev +1)
+      //     }
+      //   }
+      //   catch(e){
+      //     console.log(e);
+      //   }
+      // }
+      // useEffect(() => {
+      //   window.addEventListener("scroll" ,  handleInfiniteScroll)
+      //   return () => window.removeEventListener("scroll",handleInfiniteScroll)
+      // }, []);
+
 
       const handleClear = () => {
         setBrand([]);
@@ -146,6 +165,7 @@ console.log(initialBrands);
     <>
      <Stack
         w={"100%"}
+        mt={"100px"}
         p={{ base: "10px", sm: "10px", md: "15px", lg: "25px" }}
       >
         <Box mb={"15px"}>
@@ -220,12 +240,18 @@ console.log(initialBrands);
                   setBrand={setBrand}
                   initialBrands={initialBrands}
                 /> */}
-                <AccordianFilter
+                {/* <AccordianFilter
                  Q={Q}
                  setBrand={setBrand}
                  initialBrands={initialBrands}
                
-                />
+                /> */}
+                <Accordian  Q={Q}
+                 
+                  setBrand={setBrand}
+                 brand={brand}
+                  initialBrands={initialBrands}
+               />
                 <BrandFilter
                   options={collections(TotalData, "brand")}
                   name={"Brand"}
@@ -253,8 +279,8 @@ console.log(initialBrands);
               templateColumns={{
                 base: "repeat(1, 1fr)",
                 sm: "repeat(2, 1fr)",
-                md: "repeat(3, 1fr)",
-                lg: "repeat(4, 1fr)",
+                md: "repeat(2, 1fr)",
+                lg: "repeat(3, 1fr)",
               }}
               w={"100%"}
               boxSizing={"border-box"}

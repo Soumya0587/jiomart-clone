@@ -30,7 +30,7 @@ export const productsGetRequestAction = () => {
 export const getProducts = (Q) => (dispatch) => {
     dispatch(totalProductsGetRequestAction());
     axios
-      .get(`${BASE_URL}/grocery?c_value=${Q}&limit=20`)
+      .get(`${BASE_URL}/grocery?c_value=${Q}&limit=30`)
       .then((res) => {
         dispatch(totalProductsGetSuccessAction(res.data));
       })
