@@ -23,7 +23,9 @@ export const login = (data) => (dispatch) => {
     .post(BASE_URL + `/users/login`, data)
     .then((res) => {
       
+      console.log(res.data);
       console.log(res.data.user);
+
       dispatch(loginSuccessAction(res.data.user));
       localStorage.setItem(
         "UserDetails",

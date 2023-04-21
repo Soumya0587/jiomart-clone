@@ -28,8 +28,8 @@ import {
   import { AiOutlineQuestionCircle } from "react-icons/ai";
   import React from "react";
   import axios from "axios";
-//   import { useDispatch, useSelector } from "react-redux";
-//   import { addToCart } from "../redux/cart/cart.actions";
+  import { useDispatch, useSelector } from "react-redux";
+  import { addToCart } from "../Redux/CartReducer/CartActions";
 //   import AddedToCartModal from "../components/Cart/AddedToCartModal";
 //   import Loader from "../components/Loader";
 import { BASE_URL } from "../Util/Constant";
@@ -41,7 +41,7 @@ import { BASE_URL } from "../Util/Constant";
     };
     const toast = useToast();
     const { id } = useParams();
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
     // const { loading, error, message, total } = useSelector(
     //   (store) => store.cartManager
     // );
@@ -90,6 +90,72 @@ import { BASE_URL } from "../Util/Constant";
     //     isClosable: true,
     //   });
     // }, [setCartItem])
+
+
+    let userId= JSON.parse(localStorage.getItem("UserDetails"))?.userId
+    console.log(userId);
+
+    const handleAddtoCart = ({
+      image,
+      product_name,
+      discounted_price,
+      retail_price,
+      category,
+      sub_category,
+      discount,
+      rating,
+      brand,
+      stock,
+      _id,
+      net_quantity,
+    }) => {
+      dispatch(
+        addToCart({
+          image,
+      product_name,
+      discounted_price,
+      retail_price,
+      category,
+      sub_category,
+      discount,
+      rating,
+      brand,
+      stock,
+      
+          
+          pid: _id,
+          userId,
+          quantity: 1,
+        })
+      ).then((res)=>{
+       
+        if(res==="Item Already exist in the Cart"){
+          toast({
+            title: "Item Already exist in the Cart",
+            description: "",
+            status: "error",
+            duration: 9000,
+            isClosable: true,
+          })
+        }else{
+          toast({
+            title: "item added.",
+            description: "Item added to your cart",
+            status: "success",
+            duration: 9000,
+            isClosable: true,
+          });
+  
+        }
+      })
+     
+    };
+
+
+
+
+
+    console.log(product);
     if (product.length === 0) {
       return (
         <Box pt={"23%"} pb="15%">
@@ -125,7 +191,7 @@ import { BASE_URL } from "../Util/Constant";
                       w={{ base: "20%", md: "30%" }}>
                       {product &&
                         product.image
-                          .slice(1, 7) // only map the first 6 elements, starting from index 1
+                          .slice(0, 4) // only map the first 6 elements, starting from index 1
                           .map((e, i) => (
                             <Box
                               key={e + i}
@@ -318,6 +384,7 @@ import { BASE_URL } from "../Util/Constant";
                     colorScheme="blue"
                     size="lg"
                     // onClick={handleAddToCart}
+                    onClick={() => handleAddtoCart(product)}
                     >
                     Add to cart
                   </Button>
