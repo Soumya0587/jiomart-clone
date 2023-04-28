@@ -12,6 +12,7 @@ import {
   import { Link } from "react-router-dom";
   import CartCard from "../Components/CartCard/CartCard";
   import { getCartData } from "../Redux/CartReducer/CartActions";
+import PaymentCard from "../Components/PaymentCard/PaymentCard";
 //   import Loading from "../admin/components/Loading";
   
   const CartPage = () => {
@@ -25,15 +26,15 @@ import {
       };
     });
     let userId= JSON.parse(localStorage.getItem("UserDetails"))?.userId
-    console.log(userId);
-    let cartTotal = 0;
-    for (let i = 0; i < items.length; i++) {
-      cartTotal += items[i].discounted_price * items[i].quantity;
-    }
-    let totalMRP = 0;
-    for (let i = 0; i < items.length; i++) {
-      totalMRP += items[i].retail_price * items[i].quantity;
-    }
+    console.log(items);
+    // let cartTotal = 0;
+    // for (let i = 0; i < items.length; i++) {
+    //   cartTotal += items[i].discounted_price * items[i].quantity;
+    // }
+    // let totalMRP = 0;
+    // for (let i = 0; i < items.length; i++) {
+    //   totalMRP += items[i].retail_price * items[i].quantity;
+    // }
     const handleChange = () => {
       setChange(!change);
     };
@@ -88,7 +89,8 @@ import {
             </Box>
            
           </Box>
-          <Box
+          <PaymentCard/>
+          {/* <Box
             mt="5%"
             p="1%"
             w={{ base: "90%", md: "27%" }}
@@ -133,7 +135,7 @@ import {
             >
               Proceed to Pay
             </Button>
-          </Box>
+          </Box> */}
         </Flex>
       </div>
     );

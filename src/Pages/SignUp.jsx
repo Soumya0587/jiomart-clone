@@ -104,7 +104,7 @@ const SignUp = () => {
 
 
 
-
+console.log(userData);
   return (
     <Box
       width={"90%"}

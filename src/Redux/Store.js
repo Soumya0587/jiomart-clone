@@ -3,12 +3,16 @@ import thunk from "redux-thunk";
 import { reducer as AuthReducer } from "./AuthReducer/Reducer";
 import { GroceryReducer } from "./GroceryReducer/GroceryReducer";
 import { CartReducer } from "./CartReducer/CartReducer";
+import { AddressReducer } from "./DeliveryReducer/DeliveryReducer";
+import { OrderReducer } from "./OrderReducer/OrderReducer";
 
 
 const rootReducer = combineReducers({
   AuthReducer,
   GroceryReducer,
-  CartReducer
+  CartReducer,
+  AddressReducer,
+  OrderReducer
 });
 const comp = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 export const store = legacy_createStore(
