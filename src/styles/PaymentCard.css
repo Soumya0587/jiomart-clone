@@ -1,0 +1,14 @@
+.header{
+    width:"100%";
+    background-color: #00b259;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+    
+}
+.header-text{
+    color: white;
+}

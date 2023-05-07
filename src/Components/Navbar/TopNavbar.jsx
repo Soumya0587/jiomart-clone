@@ -58,17 +58,16 @@ const TopNavbar = () => {
         <Link to={`/signlegrocery/${el._id}`} onClick={()=>setSearchValue("")}>
           <Box
             key={el._id}
-            p={2}
-            borderWidth={1}
-            borderColor="gray.200"
-            borderRadius={4}
-            
-            mt={2}
+            pl={2}
+           display={"flex"}
+           alignItems={"flex-start"}
+            textAlign={"left"}
+            // mt={2}
             overflow="auto"
-            maxHeight="20rem"
+            // maxHeight="20rem"
             // color={"white"}
           >
-            <Text fontSize="l" fontWeight="bold">
+            <Text fontSize="xs" fontWeight="bold">
               {el.product_name}
             </Text>
            

@@ -67,7 +67,7 @@ import PaymentCard from "../Components/PaymentCard/PaymentCard";
       imageData.push(items[i].image[0])
       ProductName.push(items[i].product_name)
       TotalLength=items.length
-      TotalOrderValue+=+items[i].discounted_price
+      TotalOrderValue+=+items[i].discounted_price * +items[i].quantity
       userdetail=items[0].userId
     }
 console.log(userdetail);
@@ -85,6 +85,11 @@ console.log(userdetail);
       //     payment: payment };
       // });
       // console.log(item);
+      async function CartDelete(){
+        let del = await axios
+          .delete(`${BASE_URL}/users/cart/delete/all/${userId}`
+          )
+      }
       dispatch(addToOrder({images:imageData,
         products:ProductName,
         count:TotalLength,
@@ -100,17 +105,14 @@ console.log(userdetail);
           status: "success",
           duration: 9000,
           isClosable: true,
-        });
-        axios
-          .delete(`${BASE_URL}/users/cart/delete/all`
-          )
-          .then((res) => {
-            dispatch(getCartData);
+        })
+      
             // sendEmail();
-          //   setTimeout(() => {
-          //     navigate("/profile");
-          //   }, 2000);
-          });
+            CartDelete()
+            setTimeout(() => {
+              navigate("/profile");
+            }, 2000);
+          
       });
       // dispatch(payforOrder());
     };

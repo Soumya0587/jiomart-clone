@@ -7,6 +7,7 @@ import Slider2 from "../Components/Slider/Slider2";
 import { PosterData,FoodAndBeveragesData } from "../Components/Slider/SliderData";
 import {BASE_URL} from "../Util/Constant.js"
 import ProductSlider from "../Components/Slider/ProductSlider";
+import Navbar from "../Components/Navbar/Navbar";
 const Home = () => {
   const [Beverages,SetBeverages]=useState([])
   const [Chocolates,SetChocolates]=useState([])
@@ -24,6 +25,7 @@ const Home = () => {
   console.log(Beverages);
   return (
     <div>
+      <Navbar/>
       <Carousel />
       <img
         id="Poster"

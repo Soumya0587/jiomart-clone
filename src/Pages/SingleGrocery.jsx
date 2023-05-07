@@ -18,9 +18,13 @@ import {
     AccordionIcon,
     AccordionPanel,
     List,
-    ListItem,
+  ListItem,
+  ListIcon,
+  OrderedList,
+  UnorderedList,
     useDisclosure,
     Flex,
+    Spacer,
   } from "@chakra-ui/react";
   import { StarIcon } from "@chakra-ui/icons";
   import { Link, useParams, useNavigate } from "react-router-dom";
@@ -33,6 +37,9 @@ import {
 //   import AddedToCartModal from "../components/Cart/AddedToCartModal";
 //   import Loader from "../components/Loader";
 import { BASE_URL } from "../Util/Constant";
+import ProductSlider from "../Components/Slider/ProductSlider";
+import SimilarProduct from "../Components/SingleProductPageComp/SimilarProduct";
+import Navbar from "../Components/Navbar/Navbar";
   
   function SingleGroceryPage() {
     const navigate = useNavigate();
@@ -49,7 +56,7 @@ import { BASE_URL } from "../Util/Constant";
     const [currentImage, setCurrentImage] = React.useState("");
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [imageHeight, setImageHeight] = React.useState("100");
-  
+    
     React.useEffect(() => {
       axios
         .get(`${BASE_URL}/grocery/${id}`)
@@ -58,9 +65,9 @@ import { BASE_URL } from "../Util/Constant";
           setProduct(data);
           setCurrentImage(data.image[0]);
           if (data.image.length === 1) {
-            setImageHeight("600");
+            setImageHeight("200");
           } else if (data.image.length === 2) {
-            setImageHeight("600");
+            setImageHeight("200");
           } else if (data.image.length === 3) {
             setImageHeight("266");
           } else if (data.image.length === 4) {
@@ -147,23 +154,25 @@ import { BASE_URL } from "../Util/Constant";
           });
   
         }
+        navigate("/cart")
       })
      
     };
+   
 
 
-
-
-
-    console.log(product);
+    
     if (product.length === 0) {
       return (
         <Box pt={"23%"} pb="15%">
+          <Navbar/>
           {/* <Loader /> */}
         </Box>
       );
     } else {
       return (
+        <Box>
+          <Navbar/>
         <Box display={"grid"} py={10} pt={{ base: "30px", md: "120px" }}>
           <Flex ml={{ base: "2%", sm: "2%", md: "2%", lg: "2%" }}>
             <Button
@@ -211,7 +220,7 @@ import { BASE_URL } from "../Util/Constant";
   
                     {/* Right main Image */}
                     <Box
-                      overflow="hidden"
+                      // overflow="hidden"
                       h={{
                         md: `${
                           (product.image.length - 1) * imageHeight +
@@ -257,7 +266,7 @@ import { BASE_URL } from "../Util/Constant";
                       {product &&
                         product.image.map(
                           (e, i) =>
-                            i > 0 && (
+                            i >= 0 && (
                               <Box key={i + e} h="100px" overflow="hidden">
                                 <Image
                                   src={e}
@@ -277,7 +286,10 @@ import { BASE_URL } from "../Util/Constant";
   
               {/* Right sections */}
               <Box py={{ base: 6, md: 0 }} pl={{ md: 6 }}>
-                <Heading size={{ base: "md", md: "md", lg: "lg" }} mb={3}>
+              <Heading size={{ base: "md", md: "md", lg: "md" }} mb={3} color={"#0078ad"}>
+                  {product.brand}
+                </Heading>
+                <Heading size={{ base: "md", md: "md", lg: "md" }} mb={3}>
                   {product.product_name}
                 </Heading>
                 <Box d="flex" alignItems="center" mb={3}>
@@ -299,216 +311,75 @@ import { BASE_URL } from "../Util/Constant";
                     <Text ml={2} color="gray.500">
                       ({product.rating})
                     </Text>
-                    <Text color={"#0076be"} fontWeight="medium">
-                      | <Link>Write a Review</Link>
-                    </Text>
+                    
                   </HStack>
                 </Box>
                 <HStack>
-                  <Text fontSize="2xl" fontWeight="bold" mb={3} color={"#e53e3e"}>
-                    Rs.{product.discounted_price}
+                  <Text fontSize="2xl" fontWeight="bold">
+                  ₹{product.discounted_price}
                   </Text>
+                  <Box bgColor={"#e5f7ee"}>
+                    <Text fontWeight="bold" color={"#03753c"} p={"5px"}>{product.discount}% Off</Text>
+                  </Box>
+                  </HStack>
+                  <HStack>
+                    <Text>M.R.P:</Text>
                   <Text
                     textDecoration={"line-through"}
                     fontSize="xl"
                     mb={3}
                     color="gray.500">
-                    Rs.{product.retail_price}
+                    ₹{product.retail_price}
                   </Text>
-                </HStack>
+                  <Text> (Incl. of all taxes)</Text>
+                  </HStack>
+                  <Divider borderColor={"black"} mt={"20px"} mb={"20px"}></Divider>
+                  <Box>
+                  <Heading size={{ base: "md", md: "md", lg: "lg" }} mb={3}>Features & Details</Heading>
+                  <UnorderedList>
+                    {product.features.map((el)=>(
+                      
+                        <ListItem>{el}</ListItem>
+                        
+                      
+                    ))}
+                  </UnorderedList>
+                  </Box>
+                  <Divider borderColor={"black"} mt={"20px"} mb={"20px"}></Divider>
                 <Box>
-                  <VStack>
-                    <HStack spacing={0}>
-                      <Text w="100%" fontSize={{ base: "16", md: "18px" }}>
-                        or 4 interest-free payments of Rs.17.24 with
-                      </Text>
-                      <Box w="35%" h={"100%"}>
-                        <Image
-                          objectFit={"cover"}
-                          src="./afterpay_logo.png"></Image>
-                      </Box>
-                    </HStack>
-                    <Divider borderColor={"black"}></Divider>
-                    <Box w="full">
-                      <Text
-                        fontWeight={"medium"}
-                        w="full"
-                        fontSize={{ base: "16", md: "20px" }}>
-                        Special Offers:{" "}
-                      </Text>
-                      <Text
-                        color={"#e53e3e"}
-                        fontWeight="medium"
-                        w="full"
-                        fontSize={{ base: "16", md: "18px" }}>
-                        Bobbi Brown Must Haves Set, $15 with Belk purchase
-                      </Text>
-                    </Box>
-                    <Divider borderColor={"black"}></Divider>
-                  </VStack>
+                  <Heading size={{ base: "md", md: "md", lg: "lg" }} mb={3}>Description</Heading>
+                  <Text>{product.description}</Text>
                 </Box>
-                <Box mt={3}>
-                  <Text
-                    fontWeight={"medium"}
-                    w="full"
-                    fontSize={{ base: "16", md: "20px" }}>
-                    Apply Coupon
-                  </Text>
-                  <Input
-                    w="full"
-                    placeholder="Enter coupon code"
-                    size="lg"
-                    mt={3}
-                  />
-                  <Button colorScheme="blue" size="md" mt={3} mb="3">
-                    Apply
-                  </Button>
-                </Box>
-                <Divider borderColor={"black"}></Divider>
-                <HStack fontSize={{ base: "16", md: "18px" }} mt="20px" mb="20px">
-                  <Icon
-                    as={TbTruckDelivery}
-                    fontSize={{ base: "35px", lg: "35px" }}></Icon>
-                  <Text fontWeight={"medium"}>Same Day Delivery</Text>
-                  <Icon as={AiOutlineQuestionCircle}></Icon>
-                  <Text color={"#0076be"} fontWeight={"medium"} cursor="pointer">
-                    Check My Area
-                  </Text>
-                </HStack>
-                <Divider borderColor={"black"}></Divider>
+                
   
-                <VStack spacing={3}>
+                <VStack mt={"20px"} spacing={3}>
                   <Button
                     // isLoading={loading}
                     w="full"
-                    colorScheme="blue"
+                    bgColor="#0078ad"
                     size="lg"
+                    _hover={{ bg: '#0c5273' }}
+                    color={"white"}
+                    borderRadius={"30px"}
                     // onClick={handleAddToCart}
                     onClick={() => handleAddtoCart(product)}
                     >
                     Add to cart
                   </Button>
-                  {/* <AddedToCartModal
-                    onClose={onClose}
-                    isOpen={isOpen}
-                    prodID={id}
-                  /> */}
-                  <HStack>
-                    <Text
-                      color={"#0076be"}
-                      fontWeight={"medium"}
-                      cursor="pointer">
-                      Add to Registry
-                    </Text>
-                    <Text>|</Text>
-                    <Text
-                      color={"#0076be"}
-                      fontWeight={"medium"}
-                      cursor="pointer">
-                      Add to Wish List
-                    </Text>
-                  </HStack>
+                  
+                 
                 </VStack>
               </Box>
             </Grid>
-            {/* Bottom section for description */}
-            <Box mt="30px">
-              <Accordion defaultIndex={[0]} allowMultiple>
-                {/* description */}
-                <AccordionItem>
-                  <h2>
-                    <AccordionButton
-                      borderBottom={"1px solid black"}
-                      borderTop={"1px solid black"}>
-                      <Box
-                        as="span"
-                        flex="1"
-                        textAlign="left"
-                        fontSize={{ base: "16", md: "20px" }}
-                        fontWeight="bold">
-                        Description
-                      </Box>
-                      <AccordionIcon />
-                    </AccordionButton>
-                  </h2>
-                  <AccordionPanel pb={4}>
-                    <Box fontSize={{ base: "16", md: "18px" }}>
-                      {product.description}
-                    </Box>
-                    <Box>
-                      <Text
-                        fontWeight="medium"
-                        mb={{ base: "2", md: "3" }}
-                        mt={{ base: "2", md: "3" }}
-                        fontSize={{ base: "16", md: "20px" }}>
-                        Product Specifications:
-                      </Text>
-                      {/* <List spacing="1">
-                        {product &&
-                          product.product_specifications.product_specification.map(
-                            (spec, index) => (
-                              <ListItem key={index + spec}>
-                                <Text
-                                  fontSize={{ base: "16", md: "18px" }}
-                                  fontWeight="medium"
-                                  display="inline-block"
-                                  w="35%">
-                                  {spec.key}:
-                                </Text>
-                                <Text display="inline-block">{spec.value}</Text>
-                              </ListItem>
-                            )
-                          )}
-                      </List> */}
-                    </Box>
-                  </AccordionPanel>
-                </AccordionItem>
-  
-                {/* Shipping and Returns */}
-                <AccordionItem>
-                  <h2>
-                    <AccordionButton borderBottom={"1px solid black"}>
-                      <Box
-                        as="span"
-                        flex="1"
-                        textAlign="left"
-                        fontSize={{ base: "16", md: "20px" }}
-                        fontWeight="bold">
-                        Shipping & Returns
-                      </Box>
-                      <AccordionIcon />
-                    </AccordionButton>
-                  </h2>
-                  <AccordionPanel pb={4}>
-                    <Text
-                      fontWeight="medium"
-                      mb={{ base: "2", md: "3" }}
-                      mt={{ base: "2", md: "3" }}
-                      fontSize={{ base: "16", md: "20px" }}>
-                      Shipping Details
-                    </Text>
-  
-                    <Text fontSize={{ base: "16", md: "18px" }}>
-                      Shipping your purchase is easy at belk.com. Depending on
-                      your shipping method and the destination of your package,
-                      you can expect it to arrive within 3-10 business days
-                      Details
-                    </Text>
-                    <Text
-                      fontWeight="medium"
-                      mb={{ base: "2", md: "3" }}
-                      mt={{ base: "2", md: "3" }}
-                      fontSize={{ base: "16", md: "20px" }}>
-                      Return Details
-                    </Text>
-                    <Text fontSize={{ base: "16", md: "18px" }}>
-                      Returns are easy at belk.com. Easy returns
-                    </Text>
-                  </AccordionPanel>
-                </AccordionItem>
-              </Accordion>
-            </Box>
+         
+            
           </Container>
+         
+          
+          
+          
+        </Box>
+        <SimilarProduct value={product}/>
         </Box>
       );
     }

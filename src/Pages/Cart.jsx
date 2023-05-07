@@ -13,8 +13,10 @@ import {
   import CartCard from "../Components/CartCard/CartCard";
   import { getCartData } from "../Redux/CartReducer/CartActions";
 import PaymentCard from "../Components/PaymentCard/PaymentCard";
+import Navbar from "../Components/Navbar/Navbar";
+import Loader from "../Components/Loader";
 //   import Loading from "../admin/components/Loading";
-  
+
   const CartPage = () => {
     const dispatch = useDispatch();
     const [change, setChange] = useState(false);
@@ -44,14 +46,19 @@ import PaymentCard from "../Components/PaymentCard/PaymentCard";
     }, [change]);
   
     return isLoading ? (
-    //   <Loading />
-    <h1>..loading</h1>
+      <div>
+        <Navbar/>
+      <Loader/>
+      </div>
+      
     ) : isError ? (
       <Heading>Something went wrong..</Heading>
     ) : items.length === 0 ? (
+      <Box>
+        <Navbar/>
       <Box
         m="auto"
-        mt="50px"
+        mt="150px"
         mb="100px"
         textAlign={"center"}
         alignItems={"center"}
@@ -73,23 +80,29 @@ import PaymentCard from "../Components/PaymentCard/PaymentCard";
           </Button>
         </Link>
       </Box>
+      </Box>
     ) : (
-      <div>
+      <div style={{marginTop:"150px"}}>
+        <Navbar/>
         <Flex
-          direction={{ base: "column", md: "row" }}
-          w={{ base: "95%", md: "85%", lg: "70%" }}
+          direction={{ base: "column", md: "row" , lg : "row" }}
+          w={{ base: "95%", md: "90%", lg: "90%" }}
           m="auto"
+          justifyContent={"space-around"}
         >
-          <Box p="20px" w={{ base: "90%", md: "70%" }}>
-            <Heading >Shopping Cart</Heading>
-            <Box p="50px">
+          <Box m="20px" w={{ base: "90%", md: "60%" }}>
+            <Heading >My Cart</Heading>
+            <Box borderRadius={"5%"}>
             {items.map((item) => (
               <CartCard handleChange={handleChange} key={item.pid} {...item} />
             ))}
             </Box>
            
           </Box>
+          
           <PaymentCard/>
+          
+          
           {/* <Box
             mt="5%"
             p="1%"

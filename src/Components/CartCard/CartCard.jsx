@@ -6,15 +6,17 @@ import {
     Heading,
     Image,
     VStack,
+    HStack,
     Text,
     Flex,
     Spacer,
+    Box
   } from "@chakra-ui/react";
   import React from "react";
   import { RiDeleteBin6Line } from "react-icons/ri";
   import { useDispatch } from "react-redux";
   import { deleteCartItem, updateQuantity } from "../../Redux/CartReducer/CartActions";
-  
+  import "../../styles/CartCard.css"
   const CartCard = ({
     pid,
     _id,
@@ -60,13 +62,14 @@ import {
         key={pid}
         // direction={{ base: "column", sm: "row" }}
         overflow="hidden"
-        variant="outline"
-        justifyContent={"space-between"}
+        marginTop={"50px"}
+        // variant="elevated"
+        justifyContent={"space-evenly"}
       >
-        <Flex direction={{ base: "column", md: "row" }}>
+        <Flex direction={{ base: "column", md: "row" }} justifyContent={"space-between"}>
           <Image
             objectFit="cover"
-            maxW={{ base: "100%", sm: "200px" }}
+            maxW={{ base: "100%", sm: "150px" }}
             src={image[0]}
             alt={product_name}
           />
@@ -80,46 +83,56 @@ import {
                 <Text textDecoration={"line-through"}>{retail_price}</Text>
               </Flex>
             </CardBody>
-  
-            <CardFooter>
-              <Flex alignItems="center">
-                <Button
-                  _hover={{ bgColor: "rgb(5,161,163)" }}
-                  bgColor={"rgb(15,181,183)"}
-                  onClick={handleReduce}
-                  size="xs"
-                  color={"white"}
-                  isDisabled={quantity === 1}
-                >
-                  -
-                </Button>
-                <Text ml="5px" mr="5px">
-                  {quantity}
-                </Text>
-                <Button
-                  _hover={{ bgColor: "rgb(5,161,163)" }}
-                  bgColor={"rgb(15,181,183)"}
-                  onClick={handleAdd}
-                  size="xs"
-                  color={"white"}
-                  isDisabled={quantity === 2}
-
-                >
-                  +
-                </Button>
-              </Flex>
-            </CardFooter>
+            {/* <Spacer/> */}
+           
+             
+             
+            
           </VStack>
           <Spacer />
           <Button
-            _hover={{ bgColor: "rgb(5,161,163)" }}
-            bgColor={"rgb(15,181,183)"}
+            _hover={{ bgColor: "#0c5273" }}
+            bgColor={"#0078ad"}
             onClick={handleDelete}
             size="sm"
           >
             <RiDeleteBin6Line color="white" />
           </Button>
         </Flex>
+        {/* <CardFooter> */}
+          <Box className="counter">
+          <Flex alignItems="center" >
+                <Button
+                  _hover={{border :"1px solid #0c5273"}}
+                 
+                  onClick={handleReduce}
+                  size="sm"
+                  color={"#0c5273"}
+                  isDisabled={quantity === 1}
+                  borderRadius={"50%"}
+                >
+                  -
+                </Button>
+                <Text ml="10px" mr="10px">
+                  {quantity}
+                </Text>
+                <Button
+                  _hover={{border :"1px solid #0c5273"}}
+                  
+                  onClick={handleAdd}
+                  size="sm"
+                  color={"#0c5273"}
+                  borderRadius={"50%"}
+                  isDisabled={quantity === 2}
+
+                >
+                  +
+                </Button>
+              </Flex>
+              
+          </Box>
+           
+            {/* </CardFooter> */}
       </Card>
     );
   };

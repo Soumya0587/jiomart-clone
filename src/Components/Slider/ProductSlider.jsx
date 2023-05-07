@@ -49,7 +49,7 @@ const ProductSlider = ({ data,value }) => {
           {data.map((item, index) => (
             <Card maxW="sm" h="400px" key={index} mr={1} ml={1}>
               <Flex alignItems={"center"} justifyContent={"center"}>
-              <Link to={`signlegrocery/${item._id}`} ><Image
+              <Link to={`../signlegrocery/${item._id}`} ><Image
                   
                   
                   w={"100px"}

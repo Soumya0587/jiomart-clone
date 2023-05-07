@@ -51,11 +51,13 @@
     position: relative;
 }
 .searchResult{
+    border-radius: 10px;
     position: absolute;
     top: 0;
     left: 0;
     background-color: white;
     color: black;
+    z-index: 1;
 }
 #input{
     background-color: #f5f5f5;

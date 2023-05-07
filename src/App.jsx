@@ -14,7 +14,7 @@ function App() {
 
   return (
     <div className="font-link">
-      <Navbar/>
+      
       <AllRoutes/>
       {/* <Footer/> */}
      

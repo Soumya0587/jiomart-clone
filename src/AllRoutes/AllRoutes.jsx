@@ -8,6 +8,12 @@ import SingleGroceryPage from '../Pages/SingleGrocery'
 import CartPage from '../Pages/Cart'
 import Checkout from '../Pages/Checkout'
 import Payment from '../Pages/Payment'
+import Profile from '../Pages/Profile'
+import AddProducts from '../Admin/AdminPages/AddProduct'
+import Inventory from '../Admin/AdminPages/Inventory'
+import EditProduct from '../Admin/AdminPages/EditProduct'
+import UserDetails from '../Admin/AdminPages/UserDetails'
+
 const AllRoutes = () => {
   return (
     <Routes>
@@ -19,7 +25,11 @@ const AllRoutes = () => {
         <Route path="/cart" element={<CartPage/>}></Route>
         <Route path='/checkout' element={<Checkout/>}></Route>
         <Route path='/payment' element={<Payment/>}></Route>
-
+        <Route path='/profile' element={<Profile/>}></Route>
+        <Route path='/admin' element={<AddProducts/>}></Route>
+        <Route path='/admin/products' element={<Inventory/>}></Route>
+        <Route path="/admin/edit/:id" element={<EditProduct/>}/>
+        <Route path="/admin/userdetails" element={<UserDetails/>}/>
     </Routes>
   )
 }

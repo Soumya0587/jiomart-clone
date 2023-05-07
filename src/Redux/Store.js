@@ -5,6 +5,7 @@ import { GroceryReducer } from "./GroceryReducer/GroceryReducer";
 import { CartReducer } from "./CartReducer/CartReducer";
 import { AddressReducer } from "./DeliveryReducer/DeliveryReducer";
 import { OrderReducer } from "./OrderReducer/OrderReducer";
+import { AdminReducer } from "./AdminReducer/AdminReducer";
 
 
 const rootReducer = combineReducers({
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
   GroceryReducer,
   CartReducer,
   AddressReducer,
-  OrderReducer
+  OrderReducer,
+  AdminReducer
 });
 const comp = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 export const store = legacy_createStore(

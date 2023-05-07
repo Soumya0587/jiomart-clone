@@ -1,6 +1,7 @@
 #bottom_container{
     width: 100%;
     background-color: #0c5273;
+    
 }
 #bottom_category {
    /* border: 1px solid yellow; */
@@ -13,6 +14,7 @@
     list-style-type: none;
     padding: 10px;
     position: relative;
+    
 }
 #bottom_category li {
     display: inline-block;
