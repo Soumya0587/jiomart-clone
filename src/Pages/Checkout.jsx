@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {AddAddress,getAdress,updateAddress} from "../Redux/DeliveryReducer/DeliveryActions"
 import { BASE_URL } from "../Util/Constant.js";
-
+import { MdEdit } from 'react-icons/md'
 import {
   Drawer,
   DrawerBody,
@@ -15,16 +15,22 @@ import {
   Button,
   useDisclosure,
   Box,
+  Flex,
   Stack,
   FormLabel,
   Input,
   InputGroup,
   Select,
-  Textarea
+  Textarea,
+  Heading
 } from '@chakra-ui/react'
 import axios from "axios";
-// import PaymentCard from "../Components/PaymentCard/PaymentCard";
-
+import Navbar from "../Components/Navbar/Navbar";
+import Loader from "../Components/Loader";
+import CartCard from "../Components/CartCard/CartCard";
+import PaymentCard from "../Components/PaymentCard/PaymentCard";
+import { getCartData } from "../Redux/CartReducer/CartActions";
+import "../styles/Checkout.css"
 const Checkout = () => {
   const [change, setChange] = useState(false);
 
@@ -41,7 +47,12 @@ console.log(userId);
       address: store.AddressReducer.address,
     };
   });
-
+  const {items } = useSelector((store) => {
+    return {
+     
+      items: store.CartReducer.items,
+    };
+  });
   const handleChange = () => {
     setChange(!change);
   };
@@ -50,6 +61,7 @@ console.log(userId);
   }
 
   useEffect(() => {
+    dispatch(getCartData(userId));
    dispatch(getAdress(userId))
   }, [change]);
   const initialstate = {
@@ -87,16 +99,33 @@ console.log(userId);
     onClose()
   }
 console.log(getadress);
-  return (
-    <div style={{ margin: "auto", marginTop: "150px" }}>
-      <div>
-        <h1>Order Review</h1>
-        {/* <PaymentCard/> */}
+  return isLoading ? (
+    <div>
+      
+    <Loader/>
+    </div>
+    
+  ) : isError ? (
+    <Heading >Something went wrong..</Heading>
+  ) : (
+    
+    <div style={{ margin: "auto"}}>
+       <Flex
+          direction={{ base: "column", md: "row" , lg : "row" }}
+          w={{ base: "95%", md: "90%", lg: "90%" }}
+          m="auto"
+          justifyContent={"space-around"}
+        >
+          <Box m="20px" w={{ base: "90%", md: "60%" }}>
+          <div>
+        <Heading>Order Review</Heading>
+        
         {address.length === 0 ? <div>
-          <h1>Add your delivery adress here</h1>
-          <Button colorScheme='teal' onClick={onOpen}>
+          <Flex justifyContent={"space-between"}> <h1>Add your delivery adress here</h1>
+          <Button backgroundColor='#0078ad' color={"white"} _hover={{ bg: '#0c5273' }} onClick={onOpen}>
         Add
-      </Button>
+      </Button></Flex>
+         
       <Drawer
         isOpen={isOpen}
         placement='right'
@@ -113,7 +142,7 @@ console.log(getadress);
           <DrawerBody>
             <Stack spacing='24px'>
               <Box>
-                <FormLabel htmlFor='username'>House No.</FormLabel>
+                <FormLabel htmlFor='houseNo'>House No.</FormLabel>
                 <Input
                   onChange={(e) =>
                     setAdressDetails({ ...AdressDetails, houseNo: e.target.value })
@@ -208,14 +237,20 @@ console.log(getadress);
         </DrawerContent>
       </Drawer>
         </div> : 
-        <div>
-            {address.map((el)=>(
+        <div className="address-box" >
+          <Flex justifyContent={"space-between"}>
+          {address.map((el)=>(
               <div key={el._id}>
-                <p>{el.landmark}</p>
-                <p>{el.mobile}</p>
+                <p>{el.houseNo},{el.building},{el.address},{el.landmark},{el.city}-{el.pincode}</p>
+                <p>phone: +91 - {el.mobile}</p>
               </div>
             ))}
-            <button onClick={onOpen}>edit</button>
+            {/* <button onClick={onOpen}>edit</button> */}
+            <div className="edit" onClick={onOpen}>
+              <MdEdit/>
+            </div>
+          </Flex>
+            
             <Drawer
         isOpen={isOpen}
         placement='right'
@@ -344,7 +379,19 @@ console.log(getadress);
       </Drawer>
           </div>}
       </div>
-    </div>
+    
+            <Box borderRadius={"5%"}>
+            {items.map((item) => (
+              <CartCard handleChange={handleChange} key={item.pid} {...item} />
+            ))}
+            </Box>
+           
+          </Box>
+          
+          <PaymentCard/>
+         
+        </Flex>
+        </div>
   );
 };
 

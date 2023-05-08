@@ -1,0 +1,15 @@
+.edit{
+    height: 40px;
+    width: 40px;
+    border: 1px solid #0078ad;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.address-box{
+    border: 1px solid;
+    border-radius: 20px;
+    margin-top: 20px;
+    padding: 20px;
+}
