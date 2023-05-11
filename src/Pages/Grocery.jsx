@@ -24,6 +24,9 @@ import { BASE_URL } from '../Util/Constant';
 import { BrandFilter } from '../Components/Filter/BrandFilter';
 import GroceryCard from '../Components/Grocery/GroceryCard';
 import Accordian from '../Components/Accordian/Accordian';
+import Navbar from '../Components/Navbar/Navbar';
+import { Pagination } from '../Components/Pagination/Pagination';
+import { FiltersDrawer } from '../Components/Grocery/FiltersDrawer';
 const Grocery = () => {
 
 const [searchParams, setSearchParams] = useSearchParams();
@@ -39,7 +42,10 @@ console.log(initialBrands);
       TotalData: store.GroceryReducer.TotalData,
     };
   });
-// console.log(products);
+console.log(products);
+
+
+
   const collections = (data, name) => {
     const unique = [];
     
@@ -64,7 +70,7 @@ console.log(initialBrands);
 
   const [value, setValue] = useState();
   const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(30);
+  const [limit, setLimit] = useState(6);
   const { Q } = useParams();
 
   const c_value =
@@ -128,7 +134,7 @@ console.log(initialBrands);
             console.log(err.message);
           });
       };
-
+      
       useEffect(() => {
         dispatch(getProducts(c_value));
     
@@ -139,7 +145,7 @@ console.log(initialBrands);
         setSearchParams(params);
         
 
-      }, [brand,page,limit]);
+      }, [brand,page,limit,value]);
 
       // const handleInfiniteScroll= async()=>{
       //   try{
@@ -156,13 +162,14 @@ console.log(initialBrands);
       //   return () => window.removeEventListener("scroll",handleInfiniteScroll)
       // }, []);
 
-
+     
       const handleClear = () => {
         setBrand([]);
       };
     // console.log(TotalData);
   return (  
     <>
+    <Navbar/>
      <Stack
         w={"100%"}
         mt={"100px"}
@@ -181,19 +188,20 @@ console.log(initialBrands);
               </Text>
             </HStack>
             <UnorderedList
+            
               display={{ base: "block", sm: "block", md: "none", lg: "none" }}
             >
-              <Stack w={"100%"} justify={"flex-start"} align={"flex-start"}>
-                {/* <FiltersDrawer
+              <Stack  w={"100%"} justify={"flex-start"} align={"flex-start"}>
+                <FiltersDrawer
                   Q={Q}
-                  brands={brands}
-                  setBrands={setBrands}
+                  setBrand={setBrand}
+                 brand={brand}
+                  initialBrands={initialBrands}
                  
                   handleClear={handleClear}
                 
-                  initialBrands={initialBrands}
                   
-                /> */}
+                />
               </Stack>
             </UnorderedList>
           </HStack>
@@ -264,18 +272,26 @@ console.log(initialBrands);
           </UnorderedList>
 
           <Stack>
-            <HStack w={"100%"} mt={"0px"}>
-              {/* <FiltersTop
-                collections={collections}
-                brand={brand}
-                value={value}
-                setValue={setValue}
-              /> */}
+            <HStack w={"100%"}>
+            <Box>
+                <Select
+                  onChange={(e) => setValue(e.target.value)}
+                  focusBorderColor={"#e2e8f0"}
+                  placeholder="Sort by Recomended."
+                >
+                  <option name={"asc"} value="asc">
+                    Price: Low to High
+                  </option>
+                  <option name={"dsc"} value="dsc">
+                    Price: High to Low
+                  </option>
+                </Select>
+              </Box>
             </HStack>
 
             <Grid
               position={"relative"}
-              top={"-40px"}
+              top={"40px"}
               templateColumns={{
                 base: "repeat(1, 1fr)",
                 sm: "repeat(2, 1fr)",
@@ -294,6 +310,13 @@ console.log(initialBrands);
                 />
               ))}
             </Grid>
+            <Stack paddingTop={"100px"} minW={"300px"} justify={"space-between"} align={"center"}>
+              <Pagination
+                current={page}
+                total={Math.ceil(TotalData.length / limit)}
+                onChange={(value) => setPage(value)}
+              />
+            </Stack>
           </Stack>
         </Grid>
       </Stack>

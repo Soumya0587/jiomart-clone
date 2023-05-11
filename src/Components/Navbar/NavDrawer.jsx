@@ -20,6 +20,7 @@ import {
 } from "@chakra-ui/react";
 import app_store_logo from "../../Images/app_store.png";
 import play_store_logo from "../../Images/play_store.png";
+// import "../../styles/TopNavbar.css"
 const NavDrawer = ({ isOpen, onClose }) => {
   const data = [
     {

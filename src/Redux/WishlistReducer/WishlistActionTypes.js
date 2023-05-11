@@ -1,0 +1,3 @@
+export const WISHLIST_REQ = "WISHLIST_REQ";
+export const WISHLIST_SUCCESS = "WISHLIST_SUCCESS";
+export const WISHLIST_FAIL = "WISHLIST_FAIL";

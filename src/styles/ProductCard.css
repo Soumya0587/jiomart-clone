@@ -1,0 +1,24 @@
+div.name{
+    white-space: nowrap; 
+    width: 100%; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    /* border: 1px solid #000000; */
+}
+
+.heart{
+    font-size: 35px;
+    color:rgb(182, 173, 173);
+    margin-top: 7px;
+     width: 70px;
+     outline: none;
+     text-transform: uppercase;
+     cursor: pointer;
+     font-weight: bold;
+ }
+ .heart:hover{
+    color: rgb(192, 39, 39);
+ }
+ .heart .active{
+    color:rgb(192, 39, 39);
+ }

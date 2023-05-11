@@ -6,6 +6,7 @@ import { CartReducer } from "./CartReducer/CartReducer";
 import { AddressReducer } from "./DeliveryReducer/DeliveryReducer";
 import { OrderReducer } from "./OrderReducer/OrderReducer";
 import { AdminReducer } from "./AdminReducer/AdminReducer";
+import { WishlistReducer } from "./WishlistReducer/WishlistReducer";
 
 
 const rootReducer = combineReducers({
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
   CartReducer,
   AddressReducer,
   OrderReducer,
-  AdminReducer
+  AdminReducer,
+  WishlistReducer
 });
 const comp = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 export const store = legacy_createStore(

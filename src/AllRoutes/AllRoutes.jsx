@@ -13,6 +13,7 @@ import AddProducts from '../Admin/AdminPages/AddProduct'
 import Inventory from '../Admin/AdminPages/Inventory'
 import EditProduct from '../Admin/AdminPages/EditProduct'
 import UserDetails from '../Admin/AdminPages/UserDetails'
+import Wishlist from '../Pages/Wishlist'
 
 const AllRoutes = () => {
   return (
@@ -23,6 +24,7 @@ const AllRoutes = () => {
         <Route path="/grocery/:Q" element={<Grocery/>}></Route>
         <Route path="/signlegrocery/:id" element={<SingleGroceryPage/>}></Route>
         <Route path="/cart" element={<CartPage/>}></Route>
+        <Route path='/wishlist' element={<Wishlist/>}></Route>
         <Route path='/checkout' element={<Checkout/>}></Route>
         <Route path='/payment' element={<Payment/>}></Route>
         <Route path='/profile' element={<Profile/>}></Route>

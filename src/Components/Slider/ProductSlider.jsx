@@ -15,6 +15,7 @@ import {
 } from "@chakra-ui/react";
  
 import { Link } from "react-router-dom";
+import ProductCard from "../ProductCard/ProductCard";
 
 const ProductSlider = ({ data,value }) => {
  
@@ -47,54 +48,7 @@ const ProductSlider = ({ data,value }) => {
       <div style={{ width: "95%", margin: "auto" }}>
         <Carousel responsive={responsive}>
           {data.map((item, index) => (
-            <Card maxW="sm" h="400px" key={index} mr={1} ml={1}>
-              <Flex alignItems={"center"} justifyContent={"center"}>
-              <Link to={`../signlegrocery/${item._id}`} ><Image
-                  
-                  
-                  w={"100px"}
-                  h={"150px"}
-                  display={"block"}
-                  src={item.image[0]}
-                  borderRadius="lg"
-                /></Link>
-              </Flex>
-              <Stack p="6" bg="white">
-                {/* <Flex gap={4} textAlign={"center"}>
-                  <Box bg={"#00B5B7"} color={"white"} pl={3} pr={3}>
-                    {item.rating} <span style={{ fontSize: "20px" }}>*</span>
-                  </Box>
-                  <Text fontSize={12}>{item.review} reviews</Text>
-                </Flex> */}
-                <Heading size="sm">
-                  {item.product_name}
-                </Heading>
-                <Flex gap={2} alignItems={"center"}>
-                  <Heading fontSize="xl">₹ {item.discounted_price}</Heading>{" "}
-                  <Text color="gray" textDecoration={"line-through"}>
-                    ₹{item.retail_price}
-                  </Text>
-                  <Text color="green.600" fontSize="14">
-                    {item.discount}
-                    % Off
-                  </Text>
-                </Flex>
-              </Stack>
-              <Button
-                // onClick={() => handleAddtoCart(item)}
-                w={"95%"}
-                margin="auto"
-                mb="3"
-                boxShadow="lg"
-                p="6"
-                bg="white"
-                _hover={{ bg: "orange", color: "white" }}
-                colorScheme="orange"
-                variant="outline"
-              >
-                Add to cart
-              </Button>
-            </Card>
+            <ProductCard item={item} index={index}/>
           ))}
         </Carousel>
       </div>

@@ -1,7 +1,8 @@
 .wrapper{
     display: flex;
-    border: 2px solid;
+    /* border: 0.25px solid grey; */
     /* height: 80vh; */
+   
 }
 .accordian{
     width: 100%;

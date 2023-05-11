@@ -4,7 +4,8 @@
     height: 70px;
     display: flex;
     /* position: fixed; */
-    /* z-index: 1000; */
+    
+    /* z-index: 99999; */
 }
 #IconButton:hover{
     background-color: #0c5273;
@@ -77,3 +78,7 @@
     background-color: #0c5273;
 
 }
+/* .main{
+    position: relative;
+    z-index: 9999999999;
+} */

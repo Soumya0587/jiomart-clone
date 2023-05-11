@@ -1,7 +1,9 @@
 #bottom_container{
     width: 100%;
     background-color: #0c5273;
+    /* position: relative; */
     
+    /* z-index: 99999; */
 }
 #bottom_category {
    /* border: 1px solid yellow; */
@@ -15,6 +17,7 @@
     padding: 10px;
     position: relative;
     
+    /* z-index: 99999; */
 }
 #bottom_category li {
     display: inline-block;
@@ -40,7 +43,7 @@
    
     display: none;
     padding: 2%;
-    z-index: 10000;
+    /* z-index: 10000; */
     background-color: #f5f5f5;
     border-radius: 20px;
     box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
